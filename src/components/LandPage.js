@@ -1,4 +1,5 @@
 import React from "react";
+import "./LandPage.css";
 import { Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
@@ -6,7 +7,6 @@ import img from "../img/undraw_Dev_focus_re_6iwt.png";
 import apps from "../img/app-web.PNG";
 import time from "../img/timetrack.PNG";
 import proj from "../img/projectmanage.PNG";
-import "./LandPage.css";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Button2 from "@mui/material/Button";
 
