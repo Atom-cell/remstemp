@@ -1,16 +1,13 @@
 import React from "react";
+import "./MoreFeatures.css";
 import { Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
-import img from "../img/undraw_Dev_focus_re_6iwt.png";
 import apps from "../img/app-web.PNG";
 import time from "../img/timetrack.PNG";
 import proj from "../img/projectmanage.PNG";
-import "./LandPage.css";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import Button2 from "@mui/material/Button";
 
-function LandPage() {
+function MoreFeatures() {
   return (
     <div>
       <Navbar expand="sm" className="appbar">
@@ -40,32 +37,6 @@ function LandPage() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* header */}
-      <Container>
-        <Row>
-          <Col xs={12} md={6}>
-            <div className="header-text">
-              <h1>100% free employee monitoring and timesheets</h1>
-              <h2>with REMS</h2>
-              <p>
-                Boost your team productivity by 2x with an intelligent
-                monitoring system
-              </p>
-            </div>
-            <div className="header-features">
-              <h4>Activity Monitoring</h4>
-              <h4>Time Tracking</h4>
-              <h4>Project Management</h4>
-            </div>
-            <Button className="signbtn2" type="button">
-              Start Monitoring. It's free!
-            </Button>
-          </Col>
-          <Col xs={12} md={6}>
-            <Image src={img} className="headerimg" />
-          </Col>
-        </Row>
-      </Container>
       {/* Feature 1 */}
       <Container>
         <Row>
@@ -123,16 +94,7 @@ function LandPage() {
           </Col>
         </Row>
       </Container>
-      <Container>
-        <Row>
-          <Col xs={12} className="more">
-            {/* <Button>
-              More Features <ChevronRightIcon color="action" />
-            </Button> */}
-            <Button2 endIcon={<ChevronRightIcon />}>More Features</Button2>
-          </Col>
-        </Row>
-      </Container>
+
       <>
         <Row style={{ backgroundColor: "red" }}>
           <Col xs={12}>
@@ -147,4 +109,4 @@ function LandPage() {
   );
 }
 
-export default LandPage;
+export default MoreFeatures;
