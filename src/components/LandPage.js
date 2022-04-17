@@ -2,6 +2,7 @@ import React from "react";
 import "./LandPage.css";
 import { Navbar } from "react-bootstrap";
 import { Nav } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import img from "../img/undraw_Dev_focus_re_6iwt.png";
 import apps from "../img/app-web.PNG";
@@ -11,29 +12,29 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import Button2 from "@mui/material/Button";
 
 function LandPage() {
+  let navigate = useNavigate();
   return (
     <div>
       <Navbar expand="sm" className="appbar">
         <Container>
-          <Navbar.Brand href="#home" className="rems">
-            REMS
-          </Navbar.Brand>
+          <Navbar.Brand className="rems">REMS</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home" className="one">
+              <Nav.Link href="/" className="one">
                 Home
               </Nav.Link>
-              <Nav.Link href="#features" className="two">
+              <Nav.Link href="/features" className="two">
                 Features
               </Nav.Link>
-              <Nav.Link href="#download" className="three">
+              <Nav.Link href="/download" className="three">
                 Download
               </Nav.Link>
               <Nav.Link href="#login" className="four">
                 Login
               </Nav.Link>
             </Nav>
+            {/* <Nav.Link className="four">Login</Nav.Link> */}
             <Button className="signbtn" type="button">
               Get Started
             </Button>
@@ -129,7 +130,12 @@ function LandPage() {
             {/* <Button>
               More Features <ChevronRightIcon color="action" />
             </Button> */}
-            <Button2 endIcon={<ChevronRightIcon />}>More Features</Button2>
+            <Button2
+              onClick={() => navigate("/features")}
+              endIcon={<ChevronRightIcon />}
+            >
+              More Features
+            </Button2>
           </Col>
         </Row>
       </Container>

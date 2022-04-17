@@ -1,14 +1,9 @@
 import React from "react";
 import "./MoreFeatures.css";
-import { Navbar } from "react-bootstrap";
-import { Nav } from "react-bootstrap";
+import { Navbar, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import FiberManualRecordOutlinedIcon from "@mui/icons-material/FiberManualRecordOutlined";
-import apps from "../img/app-web.PNG";
-import time from "../img/timetrack.PNG";
-import proj from "../img/projectmanage.PNG";
-import bill from "../img/billing.PNG";
-import report from "../img/report.PNG";
 import features from "./features";
 
 function MoreFeatures() {
@@ -16,28 +11,24 @@ function MoreFeatures() {
     <div>
       <Navbar expand="sm" className="appbar">
         <Container>
-          <Navbar.Brand href="#home" className="rems">
-            {features.title}
-          </Navbar.Brand>
+          <Navbar.Brand className="rems">REMS</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home" className="one">
+              <Nav.Link href="/" className="one">
                 Home
               </Nav.Link>
-              <Nav.Link
-                href="#features"
-                style={{ color: "black", textDecoration: "underline" }}
-              >
+              <Nav.Link href="/features" className="two">
                 Features
               </Nav.Link>
-              <Nav.Link href="#download" className="three">
+              <Nav.Link href="/download" className="three">
                 Download
               </Nav.Link>
               <Nav.Link href="#login" className="four">
                 Login
               </Nav.Link>
             </Nav>
+            {/* <Nav.Link className="four">Login</Nav.Link> */}
             <Button className="signbtn" type="button">
               Get Started
             </Button>
@@ -52,22 +43,21 @@ function MoreFeatures() {
           </Col>
           <Col xs={12} className="ftnames">
             <h5>
-              <a href="#">User Manangement</a>
+              <a href="#user">User Manangement</a>
               <FiberManualRecordOutlinedIcon fontSize="small" />
-              <a href="#">Activity Monitor</a>
+              <a href="#activity">Activity Monitor</a>
               <FiberManualRecordOutlinedIcon fontSize="small" />
-              <a href="#">Dashboard</a>
+              <a href="#dashboard">Dashboard</a>
               <FiberManualRecordOutlinedIcon fontSize="small" />
-              <a href="#">Project Management</a>
+              <a href="#project">Project Management</a>
               <FiberManualRecordOutlinedIcon fontSize="small" />
-              <a href="#">Time Tracking</a>
+              <a href="#time">Time Tracking</a>
               <FiberManualRecordOutlinedIcon fontSize="small" />
-              <a href="#">Calendar & Meetups</a>
+              <a href="#calendar">Calendar & Meetups</a>
               <FiberManualRecordOutlinedIcon fontSize="small" />
-              <a href="#">Report</a>
+              <a href="#report">Report</a>
               <FiberManualRecordOutlinedIcon fontSize="small" />
-              <a href="#">Billing</a>
-              <FiberManualRecordOutlinedIcon fontSize="small" />
+              <a href="#billing">Billing</a>
             </h5>
           </Col>
         </Row>
@@ -82,7 +72,7 @@ function MoreFeatures() {
                   <Col xs={12} md={6} className="ft1img">
                     <Image src={ft.img} className="headerimg" />
                   </Col>
-                  <Col xs={12} md={6}>
+                  <Col xs={12} md={6} id={ft.id}>
                     <div className="ft1">
                       <h1>{ft.title}</h1>
                       <p>{ft.description}</p>
@@ -91,7 +81,7 @@ function MoreFeatures() {
                 </>
               ) : (
                 <>
-                  <Col xs={12} md={6}>
+                  <Col xs={12} md={6} id={ft.id}>
                     <div className="ft1">
                       <h1>{ft.title}</h1>
                       <p>{ft.description}</p>
@@ -111,8 +101,9 @@ function MoreFeatures() {
         <Row style={{ backgroundColor: "red" }}>
           <Col xs={12}>
             <div className="footer">
-              <h1>Start monitoring your remote employees now!</h1>
+              <h1>Start monitoring with REMS!</h1>
               <Button>Creat Free Account Now</Button>
+              <p>Remote Employee Monitoring System</p>
             </div>
           </Col>
         </Row>
@@ -122,116 +113,3 @@ function MoreFeatures() {
 }
 
 export default MoreFeatures;
-
-{
-  /* <Container>
-        <Row>
-          <Col xs={12} md={6} className="ft1img">
-            <Image src={apps} className="headerimg" />
-          </Col>
-          <Col xs={12} md={6}>
-            <div className="ft1">
-              <h1>Manage all your employees easily</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut
-                corporis praesentium, dolorem exercitationem pariatur doloremque
-                eligendi a nobis commodi neque eveniet dolorum vero. Fugiat vel,
-                minus nulla voluptas earum quidem?
-              </p>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-
-      <Container>
-        <Row>
-          <Col xs={12} md={6}>
-            <div className="ft1">
-              <h1>Monitor the apps your employees uses, in realtime</h1>
-              <p>
-                Working hard or browsing social media? Always know how your
-                employees use their time. Track app and website usage, and
-                overall productivity.
-              </p>
-            </div>
-          </Col>
-          <Col xs={12} md={6} className="ft1img">
-            <Image src={apps} className="headerimg" />
-          </Col>
-        </Row>
-      </Container>
-
-      <Container>
-        <Row>
-          <Col xs={12} md={6}>
-            <div className="ft1">
-              <h1>A comprehensive Dashboard to give you an overview.</h1>
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut
-                corporis praesentium, dolorem exercitationem pariatur doloremque
-                eligendi a nobis commodi neque eveniet dolorum vero. Fugiat vel,
-                minus nulla voluptas earum quidem?
-              </p>
-            </div>
-          </Col>
-          <Col xs={12} md={6} className="ft1img">
-            <Image src={apps} className="headerimg" />
-          </Col>
-        </Row>
-      </Container>
-
-      <Container>
-        <Row>
-          <Col xs={12} md={6} className="ft1img">
-            <Image src={apps} className="headerimg" />
-          </Col>
-          <Col xs={12} md={6}>
-            <div className="ft1">
-              <h1>Monitor the apps your employees uses, in realtime</h1>
-              <p>
-                Working hard or browsing social media? Always know how your
-                employees use their time. Track app and website usage, and
-                overall productivity.
-              </p>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-
-      <Container>
-        <Row>
-          <Col xs={12} md={6}>
-            <div className="ft1">
-              <h1>02</h1>
-              <h1>Keep track of the time used to do the work.</h1>
-              <p>
-                Want to pay according to the time used to the work? Want to pay
-                fairly? Time Tracking will help you do so.
-              </p>
-            </div>
-          </Col>
-          <Col xs={12} md={6} className="ft1img">
-            <Image src={time} className="headerimg" />
-          </Col>
-        </Row>
-      </Container>
-
-
-      <Container>
-        <Row>
-          <Col xs={12} md={6} className="ft1img">
-            <Image src={proj} className="headerimg" />
-          </Col>
-          <Col xs={12} md={6}>
-            <div className="ft1">
-              <h1>03</h1>
-              <h1>Manage and assign work</h1>
-              <p>
-                Keep an eye on all the projects underway. Create projects,
-                Manage projects, Assign projects in Project Management
-              </p>
-            </div>
-          </Col>
-        </Row>
-      </Container> */
-}
