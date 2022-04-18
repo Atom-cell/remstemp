@@ -30,12 +30,16 @@ function LandPage() {
               <Nav.Link href="/download" className="three">
                 Download
               </Nav.Link>
-              <Nav.Link href="#login" className="four">
+              <Nav.Link href="/login" className="four">
                 Login
               </Nav.Link>
             </Nav>
             {/* <Nav.Link className="four">Login</Nav.Link> */}
-            <Button className="signbtn" type="button">
+            <Button
+              className="signbtn"
+              type="button"
+              onClick={() => navigate("/signup")}
+            >
               Get Started
             </Button>
           </Navbar.Collapse>
@@ -58,7 +62,11 @@ function LandPage() {
               <h4>Time Tracking</h4>
               <h4>Project Management</h4>
             </div>
-            <Button className="signbtn2" type="button">
+            <Button
+              className="signbtn2"
+              type="button"
+              onClick={() => navigate("/signup")}
+            >
               Start Monitoring. It's free!
             </Button>
           </Col>
@@ -132,6 +140,7 @@ function LandPage() {
             </Button> */}
             <Button2
               onClick={() => navigate("/features")}
+              variant="contained"
               endIcon={<ChevronRightIcon />}
             >
               More Features
@@ -144,7 +153,9 @@ function LandPage() {
           <Col xs={12}>
             <div className="footer">
               <h1>Start monitoring your remote employees now!</h1>
-              <Button>Creat Free Account Now</Button>
+              <Button onClick={() => navigate("/signup")}>
+                Creat Free Account Now
+              </Button>
             </div>
           </Col>
         </Row>
