@@ -14,7 +14,7 @@ import Button2 from "@mui/material/Button";
 function LandPage() {
   let navigate = useNavigate();
   return (
-    <div>
+    <div style={{ overflowX: "hidden" }}>
       <Navbar expand="sm" className="appbar">
         <Container>
           <Navbar.Brand className="rems">REMS</Navbar.Brand>

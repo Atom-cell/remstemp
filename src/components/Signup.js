@@ -8,21 +8,25 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
+import axios from "axios";
+
 // import { Form, Button } from "react-bootstrap";
 
 function Signup() {
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  //error messsages
   const [usernameE, setUsernameE] = React.useState({
     error: false,
     msg: "",
   });
   const [emailE, setemailE] = React.useState({ error: false, msg: "" });
   const [passwordE, setpasswordE] = React.useState({ error: false, msg: "" });
+  const [resp, setResponse] = React.useState(9);
   const [open, setOpen] = React.useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     setUsernameE({ error: false, msg: "" });
     setemailE({ error: false, msg: "" });
     setpasswordE({ error: false, msg: "" });
@@ -32,13 +36,15 @@ function Signup() {
         error: true,
         msg: "Please enter a valid fullname.",
       });
-    } else if (email === "") {
+    }
+    if (email === "") {
       setemailE({
         ...emailE,
         error: true,
         msg: "Please enter an Email address.",
       });
-    } else if (password === "" || password.length < 8) {
+    }
+    if (password === "" || password.length < 8) {
       setpasswordE({
         ...passwordE,
         error: true,
@@ -46,15 +52,43 @@ function Signup() {
       });
     }
     e.preventDefault();
-    if (username && email && password) {
-      console.log(email, password, username);
-      setOpen(true);
-      setUsername("");
-      setEmail("");
-      setPassword("");
-    }
+    uploadData();
   };
 
+  const uploadData = async () => {
+    if (username && email && password.length >= 8) {
+      if (!usernameE.error && !emailE.error && !passwordE.error) {
+        await axios
+          .post("http://localhost:5000/admin/register", {
+            username: username,
+            email: email,
+            password: password,
+          })
+          .then(function (response) {
+            console.log(response);
+            setResponse(response.data.msg);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        setpasswordE({
+          ...passwordE,
+          error: false,
+          msg: "",
+        });
+        setemailE({
+          ...emailE,
+          error: false,
+          msg: "",
+        });
+        setOpen(true);
+        setUsername("");
+        setEmail("");
+        setPassword("");
+      }
+    }
+  };
   const checkEmail = () => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setemailE({ error: false, msg: "" });
@@ -78,10 +112,20 @@ function Signup() {
     <div className="container1">
       {/* //////////// Login mai check if already reistered by finding in mongodb
       ///////////////// */}
-      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Account Created Successfully!
-        </Alert>
+      <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
+        {resp === 1 ? (
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Account Created Successfully!
+          </Alert>
+        ) : resp === 0 ? (
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+            User already exists!
+          </Alert>
+        ) : null}
       </Snackbar>
       <h2>LOGO</h2>
       <h2>Sign up to REMS</h2>

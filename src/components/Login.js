@@ -2,14 +2,15 @@ import React from "react";
 import "./Signup.css";
 import {
   TextField,
-  FormControl,
-  Input,
+  Snackbar,
   Button,
+  Alert,
   InputAdornment,
   IconButton,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
 
 function Login() {
   const [email, setEmail] = React.useState("");
@@ -17,6 +18,8 @@ function Login() {
   const [emailE, setemailE] = React.useState({ error: false, msg: "" });
   const [passwordE, setpasswordE] = React.useState({ error: false, msg: "" });
   const [showPass, setShowPass] = React.useState(false);
+  const [resp, setResponse] = React.useState(9);
+  const [open, setOpen] = React.useState(false);
 
   const handleSubmit = (e) => {
     setemailE({ error: false, msg: "" });
@@ -28,7 +31,8 @@ function Login() {
         error: true,
         msg: "Please enter an Email address.",
       });
-    } else if (password === "" || password.length < 8) {
+    }
+    if (password === "" || password.length < 8) {
       setpasswordE({
         ...passwordE,
         error: true,
@@ -36,11 +40,43 @@ function Login() {
       });
     }
     e.preventDefault();
-    if (email && password) {
-      console.log(email, password);
-    }
+    uploadData();
   };
 
+  const uploadData = async () => {
+    if (email && password.length >= 8) {
+      if (!emailE.error && !passwordE.error) {
+        //alert("dd");
+        await axios
+          .post("http://localhost:5000/emp/login", {
+            email: email,
+            password: password,
+          })
+          .then(function (response) {
+            console.log(response);
+            setResponse(response.data.msg);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        setpasswordE({
+          ...passwordE,
+          error: false,
+          msg: "",
+        });
+        setemailE({
+          ...emailE,
+          error: false,
+          msg: "",
+        });
+
+        setEmail("");
+        setPassword("");
+        setOpen(true);
+      }
+    }
+  };
   const checkEmail = () => {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
       setemailE({ error: false, msg: "" });
@@ -56,10 +92,24 @@ function Login() {
   const showPassword = () => {
     setShowPass(!showPass);
   };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   return (
     <div className="container1">
-      {/* //////////// Login mai check if already reistered by finding in mongodb
-      ///////////////// */}
+      {resp === 0 ? (
+        <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+            Invalid Credentials!
+          </Alert>
+        </Snackbar>
+      ) : resp === 1 ? (
+        alert("Logged IN")
+      ) : null}
       <h2>LOGO</h2>
       <h2>Login to REMS</h2>
       <div className="formcontainer">
