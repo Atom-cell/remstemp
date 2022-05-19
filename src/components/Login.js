@@ -135,9 +135,9 @@ function Login() {
       ) : data.role === "admin" && data.verified ? (
         alert("Login to admin")
       ) : data.updated === false ? (
-        alert("Not VERIFIED IN")
+        (window.location = "/update")
       ) : data.updated ? (
-        alert(" VERIFIED IN")
+        (window.location = "/home")
       ) : null}
       <h2>LOGO</h2>
       <h2>Login to REMS</h2>
