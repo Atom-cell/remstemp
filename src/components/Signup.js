@@ -13,6 +13,11 @@ import axios from "axios";
 // import { Form, Button } from "react-bootstrap";
 
 function Signup() {
+  React.useEffect(() => {
+    if (window.screen.width < 768) {
+      window.location = "/no";
+    }
+  }, []);
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");

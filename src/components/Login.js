@@ -9,16 +9,21 @@ import {
   IconButton,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import axios from "axios";
 
 function Login() {
+  React.useEffect(() => {
+    if (window.screen.width < 768) {
+      window.location = "/no";
+    }
+  }, []);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [emailE, setemailE] = React.useState({ error: false, msg: "" });
   const [passwordE, setpasswordE] = React.useState({ error: false, msg: "" });
   const [showPass, setShowPass] = React.useState(false);
-  const [resp, setResponse] = React.useState(9);
+  const [valid, setValid] = React.useState(9);
+  const [data, setData] = React.useState({});
   const [open, setOpen] = React.useState(false);
 
   const handleSubmit = (e) => {
@@ -53,8 +58,13 @@ function Login() {
             password: password,
           })
           .then(function (response) {
-            console.log(response);
-            setResponse(response.data.msg);
+            console.log(response.data.data);
+            console.log(response.data.token);
+            setValid(response.data.msg);
+            //for updating info email is needed
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("email", response.data.data.email);
+            setData(response.data.data);
           })
           .catch(function (error) {
             console.log(error);
@@ -73,6 +83,7 @@ function Login() {
 
         setEmail("");
         setPassword("");
+
         setOpen(true);
       }
     }
@@ -99,16 +110,34 @@ function Login() {
 
     setOpen(false);
   };
+
+  const checkAuth = () => {
+    axios
+      .get("http://localhost:5000/emp/checkAuth", {
+        headers: {
+          "x-access-token": localStorage.getItem("token"),
+        },
+      })
+      .then((response) => {
+        console.log("Response: ", response);
+      });
+  };
   return (
     <div className="container1">
-      {resp === 0 ? (
+      {valid === 0 ? (
         <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}>
           <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
             Invalid Credentials!
           </Alert>
         </Snackbar>
-      ) : resp === 1 ? (
-        alert("Logged IN")
+      ) : data.role === "admin" && !data.verified ? (
+        alert("Show verify screen")
+      ) : data.role === "admin" && data.verified ? (
+        alert("Login to admin")
+      ) : data.updated === false ? (
+        alert("Not VERIFIED IN")
+      ) : data.updated ? (
+        alert(" VERIFIED IN")
       ) : null}
       <h2>LOGO</h2>
       <h2>Login to REMS</h2>
@@ -121,6 +150,7 @@ function Login() {
             onBlur={checkEmail}
             label="Email"
             variant="outlined"
+            value={email}
             helperText={emailE.msg}
             margin="dense"
             type="text"
@@ -160,6 +190,9 @@ function Login() {
           </a>
         </p>
       </div>
+      <Button variant="contained" className="submitbtn" onClick={checkAuth}>
+        clicl me
+      </Button>
       <p className="para">
         Not yet Registered? <a href="/signup">Signup</a>
       </p>

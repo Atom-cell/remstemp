@@ -8,6 +8,8 @@ import Download from "./components/Download";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import ResetPassword from "./components/ResetPassword";
+import UpdateProfile from "./components/UpdateProfile";
+import NoMobile from "./components/NoMobile";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forget" element={<ResetPassword />} />
+          <Route path="/update" element={<UpdateProfile />} />
+          <Route path="/no" element={<NoMobile />} />
         </Routes>
 
         <CssBaseline />

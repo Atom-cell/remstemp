@@ -30,18 +30,22 @@ function LandPage() {
               <Nav.Link href="/download" className="three">
                 Download
               </Nav.Link>
-              <Nav.Link href="/login" className="four">
-                Login
-              </Nav.Link>
+              {window.screen.width > 768 ? (
+                <Nav.Link href="/login" className="four">
+                  Login
+                </Nav.Link>
+              ) : null}
             </Nav>
             {/* <Nav.Link className="four">Login</Nav.Link> */}
-            <Button
-              className="signbtn"
-              type="button"
-              onClick={() => navigate("/signup")}
-            >
-              Get Started
-            </Button>
+            {window.screen.width > 768 ? (
+              <Button
+                className="signbtn"
+                type="button"
+                onClick={() => navigate("/signup")}
+              >
+                Get Started
+              </Button>
+            ) : null}
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -62,13 +66,15 @@ function LandPage() {
               <h4>Time Tracking</h4>
               <h4>Project Management</h4>
             </div>
-            <Button
-              className="signbtn2"
-              type="button"
-              onClick={() => navigate("/signup")}
-            >
-              Start Monitoring. It's free!
-            </Button>
+            {window.screen.width > 768 ? (
+              <Button
+                className="signbtn2"
+                type="button"
+                onClick={() => navigate("/signup")}
+              >
+                Start Monitoring. It's free!
+              </Button>
+            ) : null}
           </Col>
           <Col xs={12} md={6}>
             <Image src={img} className="headerimg" />
@@ -153,9 +159,11 @@ function LandPage() {
           <Col xs={12}>
             <div className="footer">
               <h1>Start monitoring your remote employees now!</h1>
-              <Button onClick={() => navigate("/signup")}>
-                Creat Free Account Now
-              </Button>
+              {window.screen.width > 768 ? (
+                <Button onClick={() => navigate("/signup")}>
+                  Creat Free Account Now
+                </Button>
+              ) : null}
             </div>
           </Col>
         </Row>
